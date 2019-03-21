@@ -3,7 +3,12 @@ exports.seed = function (knex, Promise) {
   return knex('users').truncate().then(function () {
     // Inserts seed entries
     return knex('users').insert([
-      { id: 1, email: 'homer@gmail.com', name: 'Homer' }
+      {
+        id: 1,
+        email: 'homer@gmail.com',
+        display_name: 'Homer',
+        username: 'user1'
+      }
     ])
   })
 }
