@@ -1,11 +1,6 @@
 const router = require('express').Router();
-<<<<<<< HEAD
-const urlMetadata = require('url-metadata');
-
-=======
 const DB = require('../../dbConfig');
 const urlMetadata = require('url-metadata');
->>>>>>> 37f50788a14c11b9cf3430e6bb64fe499644f542
 // ==============================================
 // this JS file includes helpers that access our
 // database accordingly (for example, getUsers
@@ -29,8 +24,4 @@ router.get('/post', (req, res) => {
   );
 });
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> 37f50788a14c11b9cf3430e6bb64fe499644f542
