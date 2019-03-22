@@ -2,7 +2,7 @@
 
 The Back End for the Learned_A project built by Lambda students
 
-Development site hosted on here: https://still-shynin-still-strugglin.herokuapp.com/
+Development site hosted on here: https://demo-a12.herokuapp.com/
 # Usage
 1. Fork the repo and then clone it or download it.
 
