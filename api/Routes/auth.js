@@ -8,7 +8,7 @@ router.get('/github/cb', passport.authenticate('github'), function (req, res) {
   // Successful authentication, redirect home.
   console.log('here', req)
   console.log('IS USER ??? ??', req.isAuthenticated())
-  res.redirect('https://hungry-engelbart-132142.netlify.com/')
+  res.redirect('https://hungry-engelbart-132142.netlify.com/feed')
 })
 
 router.get('/login', (req, res,next)=> {
