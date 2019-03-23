@@ -29,7 +29,7 @@ passport.use(
       console.log(profile)
       const existingUser = await db('users').where('email', email).first()
       if (existingUser) {
-        done(null, existingUser)
+        done(null, email)
       } else {
         const newUser = await db('users').insert({
           email: email,
