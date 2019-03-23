@@ -6,13 +6,14 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const db = require('../dbConfig')
 
-passport.serializeUser(function (user, done) {
-  console.log('SERIALizing A user', user)
-  done(null, user.email)
+passport.serializeUser(function (email, done) {
+  console.log('SERIALizing A user', email)
+  done(null, email)
 })
 
 passport.deserializeUser(function (id, done) {
   console.log('deserializing USer', id)
+  done(null,id)
 })
 
 passport.use(
@@ -35,7 +36,7 @@ passport.use(
           display_name: profile.displayName,
           profile_picture: profile.photos[0].value
         })
-        done(null, newUser)
+        done(null, email)
       }
     }
   )
