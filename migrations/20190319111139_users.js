@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique();
     tbl.string('password').nullable();
-    tbl.string('display_name', 20).notNullable();
+    tbl.string('display_name', 254).notNullable();
     tbl.string('profile_picture').nullable();
     tbl.timestamp('created_at').defaultTo(knex.fn.now());
     tbl.timestamp('updated_at').defaultTo(knex.fn.now());
