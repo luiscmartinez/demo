@@ -1,3 +1,4 @@
+require('dotenv').config()
 const passport = require('passport')
 const GitHubStrategy = require('passport-github').Strategy
 const TwitterStrategy = require('passport-twitter').Strategy
@@ -10,7 +11,7 @@ passport.use(
     {
       clientID: 'da193d63c68a570de8dc',
       clientSecret: '45bbbe7838f269a89640da2081e1bf5dd5180308',
-      callbackURL: 'http://localhost:8000/auth/github/cb'
+      callbackURL: process.env.CB_URL
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
       console.log(profile.emails[0].value)
