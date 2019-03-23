@@ -6,6 +6,15 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 const db = require('../dbConfig')
 
+passport.serializeUser(function (user, done) {
+  console.log('SERIALizing A user', user)
+  done(null, user.email)
+})
+
+passport.deserializeUser(function (id, done) {
+  console.log('deserializing USer', id)
+})
+
 passport.use(
   new GitHubStrategy(
     {
@@ -23,7 +32,7 @@ passport.use(
       } else {
         const newUser = await db('users').insert({
           email: email,
-          name: profile.displayName,
+          display_name: profile.displayName,
           profile_picture: profile.photos[0].value
         })
         done(null, newUser)
