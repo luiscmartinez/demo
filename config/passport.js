@@ -24,6 +24,7 @@ passport.use(
       callbackURL: process.env.CB_URL
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
+      console.log(profile)
       console.log(profile.emails[0].value)
       const email = profile.emails[0].value
       console.log(profile)
