@@ -25,7 +25,6 @@ passport.use(
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
       console.log(profile)
-      console.log(profile.emails[0].value)
       const email = profile.emails[0].value || profile.id
       const display_name = profile.username || profile.displayName
       const profile_picture = profile.photos[0].value || null
