@@ -35,7 +35,7 @@ passport.use(
         done(null, existingUser)
       }
       else {
-        const createdUser = await('users').insert({github_id:github_id, display_name:display_name, profile_picture:profile_picture})
+        const createdUser = await db('users').insert({github_id:github_id, display_name:display_name, profile_picture:profile_picture})
         done(null, createdUser)
       }
     }
