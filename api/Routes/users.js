@@ -18,7 +18,8 @@ router.get('/users', async (req, res) => {
 
 router.post('/register', (req, res, next) => {
   console.log(req.body)
-  const {password, email, display_name, profile_picture  } = req.body;
+  const { email, display_name, profile_picture  } = req.body;
+  let password = req.body.password
   password = bcrypt.hashSync(password, 10)
   db('users').insert({
     email: email, password: password, display_name: display_name, profile_picture: profile_picture
