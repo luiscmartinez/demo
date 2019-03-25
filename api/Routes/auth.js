@@ -7,7 +7,7 @@ router.get('/github', passport.authenticate('github'))
 router.get('/github/cb', passport.authenticate('github'), function (req, res) {
   // Successful authentication, redirect home.
   console.log('here', req)
-  console.log('IS USER ??? ??', req.isAuthenticated())
+  console.log('IS USER A??? ??', req.isAuthenticated())
   res.redirect('https://learnedadev.netlify.com/feed')
 })
 

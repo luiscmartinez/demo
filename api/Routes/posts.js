@@ -13,6 +13,14 @@ router.get('/posts', async (req, res) => {
   res.status(200).send(posts);
 });
 
+router.post('/posts/create', (req, res, next) => {
+  const {user_id, completed, categories, rating, post_url} = req.body
+
+  db('posts').insert({
+    user_id, completed, categories, rating, post_url
+  })
+})
+
 router.get('/post', (req, res) => {
   urlMetadata(`${req.query.url}`).then(
     function(metadata) {
