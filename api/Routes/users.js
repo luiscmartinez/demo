@@ -24,8 +24,8 @@ router.post('/register', (req, res, next) => {
     email: email, password: password, display_name: display_name, profile_picture: profile_picture
   }).then((createdUser) => {
     console.log(createdUser)
-    let email = createdUser.email;
-    let token = jtw.sign({email}, process.env.TOKEN_SECRET, {
+    let newEmail = createdUser.email;
+    let token = jtw.sign({email: newEmail}, process.env.TOKEN_SECRET, {
       expiresIn: '1d'
     })
     return res.json({ mes: token })
