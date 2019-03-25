@@ -24,7 +24,7 @@ passport.use(
       callbackURL: process.env.CB_URL
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
-      // console.log(profile.emails[0].value)
+      console.log(profile.emails[0].value)
       console.log(profile)
       const display_name = profile.username || profile.displayName
       const profile_picture = profile.photos[0].value || null
