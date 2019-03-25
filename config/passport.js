@@ -25,17 +25,17 @@ passport.use(
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
       console.log(profile)
-      const email = profile.emails[0].value || profile.id
-      const display_name = profile.username || profile.displayName
-      const profile_picture = profile.photos[0].value || null
+      const github_id = profile.id
+      const display_name = profile.username
+      const profile_picture = profile.photos[0].value 
       const existingUser = await db('users')
-        .where('email', email)
+        .where('github_id', github_id)
         .first()
       if (existingUser) {
         done(null, existingUser)
       }
       else {
-        const createdUser = await('users').insert({email:email, display_name:display_name, profile_picture:profile_picture})
+        const createdUser = await('users').insert({github_id:github_id, display_name:display_name, profile_picture:profile_picture})
         done(null, createdUser)
       }
     }
