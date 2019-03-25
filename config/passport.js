@@ -24,32 +24,20 @@ passport.use(
       callbackURL: process.env.CB_URL
     },
     async function findOrCreate (accessToken, refreshToken, profile, done) {
-      console.log(profile.emails[0].value)
       console.log(profile)
+      console.log(profile.emails[0].value)
+      const email = profile.emails[0].value || profile.id
       const display_name = profile.username || profile.displayName
       const profile_picture = profile.photos[0].value || null
       const existingUser = await db('users')
-        .where('display_name', display_name)
+        .where('email', email)
         .first()
       if (existingUser) {
-        console.log('this is existing user obj', existingUser)
-        done(null, existingUser.id)
-      } else {
-        const email = profile.emails[0].value || null
-        if (email) {
-          const newUser = await db('users').insert({
-            email: email,
-            display_name: display_name
-            profile_picture: profile_picture
-          })
-          done(null, display_name)
-        } else {
-          const newUser = await db('users').insert({
-            display_name: display_name,
-            profile_picture: profile_picture
-          })
-          done(null, display_name)
-        }
+        done(null, existingUser)
+      }
+      else {
+        const createdUser = await('users').insert({email:email, display_name:display_name, profile_picture:profile_picture})
+        done(null, createdUser)
       }
     }
   )
