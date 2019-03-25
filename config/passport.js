@@ -27,6 +27,7 @@ passport.use(
       // console.log(profile.emails[0].value)
       console.log(profile)
       const display_name = profile.username || profile.displayName
+      const profile_picture = profile.photos[0].value || null
       // const email = profile.emails[0].value === typeof('string') ? profile.emails[0].value : display_name
       const existingUser = await db('users')
         .where('display_name', display_name)
@@ -40,13 +41,13 @@ passport.use(
           const newUser = await db('users').insert({
             email: email,
             display_name: profile.username,
-            profile_picture: profile.photos[0].value
+            profile_picture: profile_picture
           })
           done(null, display_name)
         } else {
           const newUser = await db('users').insert({
             display_name: profile.username,
-            profile_picture: profile.photos[0].value
+            profile_picture: profile_picture
           })
           done(null, display_name)
         }
