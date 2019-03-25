@@ -26,31 +26,20 @@ passport.use(
     async function findOrCreate (accessToken, refreshToken, profile, done) {
       // console.log(profile.emails[0].value)
       console.log(profile)
-      const display_name = profile.displayName
-      const email = profile.emails[0].value === typeof('string') ? profile.emails[0].value : display_name
-      const existingUser = await db('users').where('display_name', email).first()
+      const display_name = profile.username
+      // const email = profile.emails[0].value === typeof('string') ? profile.emails[0].value : display_name
+      const existingUser = await db('users').where('display_name', display_name).first()
       if (existingUser) {
         console.log('this is existing user obj', existingUser)
         done(null, existingUser.id)
       } else {
-        if (profile.emails[0].value) {
-          console.log('is true')
           const newUser = await db('users').insert({
-            email: profile.emails[0].value,
-            display_name: profile.displayName,
-            profile_picture: profile.photos[0].value
-          })
-          done(null, display_name)
-        } else {
-          console.log("IS NOT TRUE TO EMAIL")
-          const newUser = await db('users').insert({
-            display_name: profile.displayName,
+            display_name: profile.username,
             profile_picture: profile.photos[0].value
           })
           done(null, display_name)
         }
      }
-    }
   )
 )
 
