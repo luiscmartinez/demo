@@ -13,7 +13,7 @@ passport.serializeUser(function (email, done) {
 
 passport.deserializeUser(function (id, done) {
   console.log('deserializing USer', id)
-  done(null,id)
+  done(null, id)
 })
 
 passport.use(
@@ -26,20 +26,32 @@ passport.use(
     async function findOrCreate (accessToken, refreshToken, profile, done) {
       // console.log(profile.emails[0].value)
       console.log(profile)
-      const display_name = profile.username
+      const display_name = profile.username || profile.displayName
       // const email = profile.emails[0].value === typeof('string') ? profile.emails[0].value : display_name
-      const existingUser = await db('users').where('display_name', display_name).first()
+      const existingUser = await db('users')
+        .where('display_name', display_name)
+        .first()
       if (existingUser) {
         console.log('this is existing user obj', existingUser)
         done(null, existingUser.id)
       } else {
+        const email = profile.emails[0].value || null
+        if (email) {
+          const newUser = await db('users').insert({
+            email: email,
+            display_name: profile.username,
+            profile_picture: profile.photos[0].value
+          })
+          done(null, display_name)
+        } else {
           const newUser = await db('users').insert({
             display_name: profile.username,
             profile_picture: profile.photos[0].value
           })
           done(null, display_name)
         }
-     }
+      }
+    }
   )
 )
 
