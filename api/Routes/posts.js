@@ -13,11 +13,18 @@ router.get('/posts', async (req, res) => {
   res.status(200).send(posts);
 });
 
-router.post('/posts/create', (req, res, next) => {
+router.post('/create', (req, res, next) => {
   const {user_id, completed, categories, rating, post_url} = req.body
 
   db('posts').insert({
     user_id, completed, categories, rating, post_url
+  })
+
+})
+
+router.get('/user/post', (req, res) => {
+  db('post').where({user_id: req.body.user,}).then((rows) => {
+    res.json({post: rows})
   })
 })
 
